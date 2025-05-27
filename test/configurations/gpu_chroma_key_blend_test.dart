@@ -40,5 +40,12 @@ void main() {
       configuration.colorToReplace = const Color.fromRGBO(255, 180, 0, 1.0);
       expect(parameter.value, const Color.fromRGBO(255, 180, 0, 1.0));
     });
+
+    test('change inputBackgroundColor', () {
+      final parameter =
+          configuration.parameters.firstWhere((e) => e.name == 'inputBackgroundColor')
+              as ColorParameter;
+      expect(parameter.value, const Color.fromRGBO(0, 0, 0, 1.0));
+    });
   });
 }
