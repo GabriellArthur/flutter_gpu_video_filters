@@ -6,6 +6,7 @@ class GPUChromaKeyBlendConfiguration extends GPUFilterConfiguration
   final NumberParameter _thresholdSensitivity;
   final NumberParameter _smoothing;
   final ColorParameter _colorToReplace;
+  final ColorParameter _backgroundColor;
 
   GPUChromaKeyBlendConfiguration()
     : _thresholdSensitivity = GLFloatParameter(
@@ -18,6 +19,11 @@ class GPUChromaKeyBlendConfiguration extends GPUFilterConfiguration
         'inputColorToReplace',
         'Color To Replace',
         const Color.fromRGBO(0, 255, 0, 1.0),
+      ),
+      _backgroundColor = GLColorParameter(
+        'inputBackgroundColor',
+        'Background Color',
+        const Color.fromRGBO(0, 0, 0, 1.0),
       ),
       super('ChromaKeyBlend');
 
@@ -42,11 +48,19 @@ class GPUChromaKeyBlendConfiguration extends GPUFilterConfiguration
     _colorToReplace.value = value;
   }
 
+  /// Set the background color
+  ///
+  /// The default value is `Color.fromRGBO(0, 0, 0, 1.0)`
+  set backgroundColor(Color value) {
+    _backgroundColor.value = value;
+  }
+
   @override
   List<ConfigurationParameter> get parameters => [
     _thresholdSensitivity,
     _smoothing,
     _colorToReplace,
+    _backgroundColor,
     _image2,
   ];
 }
